@@ -12,7 +12,7 @@ set autoread
 "设置文件编码
 set encoding=utf-8
 set fileencodings=utf-8,chinese,cp936,gb18030,big5,euc-jp,euc-kr,latin1,ucs-bom
-"vim提示信息乱码的解决
+"vim提示信息乱码的解决, 用于中文版vim
 language messages zh_CN.utf-8
 "解决菜单乱码  
 source $VIMRUNTIME/delmenu.vim  
