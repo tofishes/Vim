@@ -12,8 +12,6 @@ set autoread
 "设置文件编码
 set encoding=utf-8
 set fileencodings=utf-8,chinese,cp936,gb18030,big5,euc-jp,euc-kr,latin1,ucs-bom
-"vim提示信息乱码的解决, 用于中文版vim
-language messages zh_CN.utf-8
 "解决菜单乱码  
 source $VIMRUNTIME/delmenu.vim  
 source $VIMRUNTIME/menu.vim
@@ -175,5 +173,9 @@ map <leader>nf :NERDTreeFind<cr>
 "NERD Commenter"
 let NERDShutUp=1
 
+"重命名插件，设置短命令"
+command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
+"设置Tagbar,依赖ctags，快捷键为<F8>"
+nmap <F8> :TagbarToggle<cr>
 "neocomplcache
 "let g:neocomplcache_enable_at_startup=1

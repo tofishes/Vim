@@ -1,0 +1,7 @@
+.vmb istall method:
+
+use vim open .vmb file, then:
+
+:so %
+
+will be auto install.
