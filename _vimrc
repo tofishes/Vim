@@ -124,6 +124,7 @@ map <leader>~ :tabprev<cr>
 map <leader>] :tabnext<cr>
 map <leader>[ :tabprev<cr>
 nmap <TAB> :tabnext<cr>
+nmap <leader>qf :copen<cr>
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -177,5 +178,5 @@ let NERDShutUp=1
 command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
 "设置Tagbar,依赖ctags，快捷键为<F8>"
 nmap <F8> :TagbarToggle<cr>
-"neocomplcache
-"let g:neocomplcache_enable_at_startup=1
+"syntax for jQuery.vim"
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
