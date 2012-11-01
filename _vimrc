@@ -167,6 +167,8 @@ endfunction
 
 
 "插件相关设置
+"手动载入matchit，可以解决%在html标签之间的跳转问题
+runtime macros/matchit.vim
 "NERD Tree
 map <leader>nt :NERDTreeToggle<cr>
 map <leader>nf :NERDTreeFind<cr>
@@ -180,3 +182,16 @@ command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
 nmap <F8> :TagbarToggle<cr>
 "syntax for jQuery.vim"
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+" set zencoding for unhtml file
+let g:user_zen_settings = {
+\ 'php' : {
+\ 'extends' : 'html',
+\ 'filters' : 'c',
+\ },
+\ 'xml' : {
+\ 'extends' : 'html',
+\ },
+\ 'haml' : {
+\ 'extends' : 'html',
+\ },
+\}

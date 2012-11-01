@@ -43,4 +43,5 @@ func! s:CompileLess()
 endfunc
 
 " compile less when saving.
-autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
+" 禁用自动编译， @tofishes"
+" autocmd! BufWritePost,FileWritePost *.less call s:CompileLess()
