@@ -185,6 +185,17 @@ command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
 nmap <F8> :TagbarToggle<cr>
 "syntax for jQuery.vim"
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+"syntax for json.vim"
+au! BufRead,BufNewFile *.json set filetype=json
+augroup json_autocmd 
+  autocmd! 
+  autocmd FileType json set autoindent 
+  autocmd FileType json set formatoptions=tcq2l 
+  autocmd FileType json set textwidth=78 shiftwidth=4 
+  autocmd FileType json set softtabstop=4 tabstop=4 
+  autocmd FileType json set expandtab 
+  autocmd FileType json set foldmethod=syntax 
+augroup END 
 " set zencoding for unhtml file
 let g:user_zen_settings = {
 \ 'php' : {
