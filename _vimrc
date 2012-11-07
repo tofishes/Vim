@@ -196,6 +196,8 @@ augroup json_autocmd
   autocmd FileType json set expandtab 
   autocmd FileType json set foldmethod=syntax 
 augroup END 
+" force the *.less file to css
+au! BufRead,BufNewFile *.less set ft=css syntax=css
 " set zencoding for unhtml file
 let g:user_zen_settings = {
 \ 'php' : {
