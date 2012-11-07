@@ -114,7 +114,8 @@ if s:molokai_original == 1
    hi ColorColumn                   guibg=#3B3A32
    hi LineNr          guifg=#BCBCBC guibg=#3B3A32
    hi NonText         guifg=#75715E
-   hi SpecialKey      guifg=#75715E
+   "hi SpecialKey      guifg=#75715E
+   hi SpecialKey      guifg=#CC00CC
 else
    hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
    hi Comment         guifg=#999966
@@ -123,7 +124,8 @@ else
    hi ColorColumn                   guibg=#232526
    hi LineNr          guifg=#465457 guibg=#232526
    hi NonText         guifg=#465457
-   hi SpecialKey      guifg=#465457
+   "hi SpecialKey      guifg=#465457
+   hi SpecialKey      guifg=#CC00CC
 end
 
 "
