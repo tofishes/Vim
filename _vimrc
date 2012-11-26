@@ -20,9 +20,9 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 "设置字体
 set guifont=Consolas:h13:cANSI
+set linespace=3
 colo molokai
 syntax on
-
 
 "设置界面，隐藏工具栏
 set shortmess=atI
@@ -32,6 +32,75 @@ set guioptions-=L
 autocmd GUIEnter * simalt ~X
 "总是显示标签栏,1自动，2总是，0总是不显示
 set showtabline=2
+"标签页宽度 大于等于该值 http://www.douban.com/group/topic/13507843/ 
+let s:tab_width = 20 
+"控制标签的显示： 数字前缀 加 文件名，并且长度大于等于 s:tab_width 
+function! ShortTabLabel () 
+    let bufnrlist = tabpagebuflist (v:lnum) 
+    let label = bufname(bufnrlist[tabpagewinnr (v:lnum) -1])
+    let filename = fnamemodify(label, ':t') 
+    let prefix = (v:lnum) . '.' . ' '
+    " Add 'symbol mark' if one of the buffers in the tab page is modified
+    for bufnr in bufnrlist
+        if getbufvar(bufnr, "&modified")
+            let prefix .= '@' . " " 
+            break
+        endif
+    endfor
+    let blank_len = s:tab_width - strlen(prefix) - strlen(filename) 
+    let i = 0 
+    while i < blank_len 
+        let prefix = prefix . " " 
+        let i += 1 
+    endwhile 
+    return prefix . filename 
+endfunction 
+
+set guitablabel=%{ShortTabLabel()}
+"以下这个函数更好一些，会标注出保存状态,但是有点繁杂，暂时不用
+"function! GuiTabLabel()
+    "let label = ''
+    "let bufnrlist = tabpagebuflist(v:lnum)
+    "" Append the tab number
+    "let prefix = v:lnum.'. '
+    "" Add '+' if one of the buffers in the tab page is modified
+    "for bufnr in bufnrlist
+        "if getbufvar(bufnr, "&modified")
+            "let label .= '+'
+            "break
+        "endif
+    "endfor
+    "" Append the buffer name
+    "let filename = bufname(bufnrlist[tabpagewinnr(v:lnum) - 1])
+    "if filename == ''
+        "" give a name to no-name documents
+        "if &buftype=='quickfix'
+            "let filename = '[Quickfix List]'
+        "else
+            "let filename = '[No Name]'
+        "endif
+    "else
+        "" get only the file name
+        "let filename = fnamemodify(filename,":t")
+    "endif
+    "let label .= filename
+    "" Append the number of windows in the tab page
+    "let blank_len = s:tab_width - strlen(prefix) - strlen(label) 
+    "let i = 0 
+    "while i < blank_len 
+        "let prefix = prefix . " " 
+        "let i += 1 
+    "endwhile 
+    ""return prefix . filename 
+    "return prefix . label 
+"endfunction"
+
+"突出显示当前行和列"
+set cursorline
+set cursorcolumn
+"禁止normal模式下光标闪烁
+set gcr=n:block-blinkon0
+let javascript_enable_domhtmlcss=1
 
 "functions define
 "platform
@@ -162,13 +231,14 @@ map <silent> <leader>ee :tabe $vim/_vimrc<cr>
 autocmd! bufwritepost _vimrc source $vim/_vimrc
  
 "对搜索的设置
-map ft :call Search_Word()<CR>:clist<CR>
+map ft :call Search_Word()<CR>:copen<CR>
 function! Search_Word()
     let w = expand("<cword>") " 在当前光标位置抓词
-    execute "vimgrep " w " *"
+    execute "vimgrep " w " **/*.*"
 endfunction
 
-
+"pathogen"
+"call pathogen#infect()
 "插件相关设置
 "手动载入matchit，可以解决%在html标签之间的跳转问题
 runtime macros/matchit.vim
@@ -184,7 +254,8 @@ command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
 "设置Tagbar,依赖ctags，快捷键为<F8>"
 nmap <F8> :TagbarToggle<cr>
 "syntax for jQuery.vim"
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+"au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+"au BufRead,BufNewFile *.js set ft=javascript syntax=js
 "syntax for json.vim"
 au! BufRead,BufNewFile *.json set filetype=json
 augroup json_autocmd 
