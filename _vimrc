@@ -23,6 +23,15 @@ set guifont=Consolas:h13:cANSI
 set linespace=3
 colo molokai
 syntax on
+"定义手工折叠，防止默认的syntax折叠因为语法加载顺序出错
+"有6种方式来折叠代码
+"1. manual //手工定义折叠
+"2. indent //用缩进表示折叠
+"3. expr　 //用表达式来定义折叠
+"4. syntax //用语法高亮来定义折叠
+"5. diff   //对没有更改的文本进行折叠
+"6. marker //用标志折叠
+set foldmethod=manual
 
 "设置界面，隐藏工具栏
 set shortmess=atI
@@ -125,6 +134,8 @@ endfunction
 "保存，载入session
 fu! SaveSess()
 	set sessionoptions-=curdir
+	set sessionoptions-=winpos
+	set sessionoptions-=winsize
 	set sessionoptions+=sesdir
 	set sessionoptions+=slash
 	set sessionoptions+=unix
@@ -255,7 +266,6 @@ command! -nargs=* -complete=file -bang Rn call Rename(<q-args>, '<bang>')
 nmap <F8> :TagbarToggle<cr>
 "syntax for jQuery.vim"
 "au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-"au BufRead,BufNewFile *.js set ft=javascript syntax=js
 "syntax for json.vim"
 au! BufRead,BufNewFile *.json set filetype=json
 augroup json_autocmd 
